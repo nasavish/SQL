@@ -140,6 +140,21 @@ JOIN film_actor fa ON (a.actor_id = fa.actor_id)
 JOIN film        f ON (fa.film_id = f.film_id)
 WHERE f.title = 'Alone Trip';
 
+SELECT first_name, last_name
+FROM actor
+WHERE actor_id IN
+(
+  SELECT actor_id
+  FROM film_actor
+  WHERE film_id IN
+  (
+   SELECT film_id
+   FROM film
+   WHERE title = 'Alone Trip'
+  )
+);
+
+
 -- 7c. You want to run an email marketing campaign in Canada, for which you will need the names and email addresses of all Canadian customers. Use joins to retrieve this information.
 SELECT cu.first_name    AS `First Name`,
        cu.last_name     AS `Last Name`,
